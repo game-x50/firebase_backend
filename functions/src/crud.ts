@@ -103,8 +103,7 @@ export function deleteGameForUser(userUid: string, gameUid: string): Promise<voi
 export function getBestGamesByTotalSum(limit: number, countRowsAndColumns: number): Promise<dto.GamePreviewWithUserId[]> {
     return admin.firestore()
         .collectionGroup(constants.COLLECTION_GAMES)
-        .where(constants.FIELD_COUNT_ROWS_AND_COLUMNS, constants.GRATER_OR_EQUAL_STRING, countRowsAndColumns)
-        .orderBy(constants.FIELD_COUNT_ROWS_AND_COLUMNS)
+        .where(constants.FIELD_COUNT_ROWS_AND_COLUMNS, constants.EQUALS_STRING, countRowsAndColumns)
         .orderBy(constants.FIELD_TOTAL_SUM, "desc")
         .limit(limit)
         .get()
